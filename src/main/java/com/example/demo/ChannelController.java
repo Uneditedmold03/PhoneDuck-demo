@@ -1,14 +1,10 @@
 
-package com.example.demo.controller;
+package com.example.demo;
 
-import com.example.demo.Message;
-import com.example.demo.model.Channel;
-import com.example.demo.repository.ChannelRepository;
-import com.example.demo.repository.MessageRepository;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 import java.util.Optional;
@@ -28,14 +24,14 @@ public class ChannelController {
     }
 
 
-    @GetMapping("/channels")
+    @GetMapping
     public ResponseEntity<List<Channel>> getAllChannels() {
         List<Channel> channels = channelRepository.findAll();
         // Ger http statuskod
         return new ResponseEntity<>(channels, HttpStatus.OK);
     }
 
-    @PostMapping("/channels")
+    @PostMapping()
     public ResponseEntity<Channel> createChannel(@RequestBody Channel newChannel) {
         Channel savedChannel = channelRepository.save(newChannel);
 
@@ -43,7 +39,7 @@ public class ChannelController {
         return new ResponseEntity<>(savedChannel, HttpStatus.CREATED);
     }
 
-    @PutMapping("/channels/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateChannel(@PathVariable Long id, @RequestBody Channel updatedChannel) {
         Optional<Channel> optionalChannel = channelRepository.findById(id);
         if (!optionalChannel.isPresent()) {
@@ -60,7 +56,7 @@ public class ChannelController {
         return new ResponseEntity<>(existingChannel, HttpStatus.OK);
     }
 
-    @GetMapping("/channels/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<List<Message>> getMessagesInChannel(@PathVariable Long id) {
         Optional<Channel> optionalChannel = channelRepository.findById(id);
         if (optionalChannel.isPresent()) {

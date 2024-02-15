@@ -1,6 +1,7 @@
 package com.example.demo;
-import javax.persistence.*;
 
+
+import jakarta.persistence.*;
 
 @Entity
 public class Message {
@@ -12,7 +13,7 @@ public class Message {
 
     @ManyToOne
     @JoinColumn(name = "channel_id")
-    private com.example.demo.model.Channel channel;
+    private Channel channel;
 
 
 }
