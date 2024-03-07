@@ -65,9 +65,11 @@ public class ChannelController {
             messageRepository.save(message);
             channel.getMessages().add(message);
             channelRepository.save(channel);
-            return ResponseEntity.ok(channel);
+            //return ResponseEntity.ok(channel);
+            return new ResponseEntity<>(channel, HttpStatus.OK);
         } else {
-            return ResponseEntity.notFound().build();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
         }
     }
 
